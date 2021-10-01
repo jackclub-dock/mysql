@@ -5,11 +5,10 @@ FROM mysql:${MYSQL_VERSION}
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo 'Asia/Shanghai' >/etc/timezone
 
-ADD my.cnf /etc/mysql/my.cnf
+COPY my.cnf /etc/mysql/conf.d/my.cnf
 
-RUN mkdir -p /data
-RUN usermod -u 1000 mysql
-RUN groupmod -g 1000 mysql
-RUN groupmod -g 999 mysql
+RUN chmod 0444 /etc/mysql/conf.d/my.cnf
 
-ENV MYSQL_ROOT_PASSWORD root
+CMD ["mysqld"]
+
+EXPOSE 3306
