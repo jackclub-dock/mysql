@@ -1,4 +1,5 @@
-FROM mysql
+ARG MYSQL_VERSION=latest
+FROM mysql:${MYSQL_VERSION}
 
 #时区设置
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
